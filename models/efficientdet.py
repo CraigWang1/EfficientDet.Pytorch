@@ -68,14 +68,19 @@ class EfficientDet(nn.Module):
             return self.criterion(classification, regression, anchors, annotations)
         else:
             transformed_anchors = self.regressBoxes(anchors, regression)
+            print('\nRegress Boxes:', transformed_anchors)                  #######print statements are for testing
             transformed_anchors = self.clipBoxes(transformed_anchors, inputs)
+            print('\nClip Boxes:', transformed_anchors)                  ######
             scores = torch.max(classification, dim=2, keepdim=True)[0]
+            print('\nScores:', scores) ####################
             scores_over_thresh = (scores > self.threshold)[0, :, 0]
+            print('\nScores over thresh:', scores_over_thresh) ###################3
 
             if scores_over_thresh.sum() == 0:
                 print('No boxes to NMS')
                 # no boxes to NMS, just return
                 return [torch.zeros(0), torch.zeros(0), torch.zeros(0, 4)]
+            print('Succesfully predicted a bounding box!!!!') ##########################
             classification = classification[:, scores_over_thresh, :]
             transformed_anchors = transformed_anchors[:, scores_over_thresh, :]
             scores = scores[:, scores_over_thresh, :]
