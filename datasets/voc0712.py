@@ -79,9 +79,9 @@ class VOCDetection(data.Dataset):
     """
 
     def __init__(self, root,
-                 image_sets=[('2007', 'trainval'), ('2012', 'trainval')],
+                 image_sets=[('2007', 'trainval')],   #I changed this because there's only one image directory needed for me
                  transform=None, target_transform=VOCAnnotationTransform(),
-                 dataset_name='VOC0712'):
+                 dataset_name='VOC2007'):
         self.root = root
         self.image_set = image_sets
         self.transform = transform
