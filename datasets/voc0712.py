@@ -12,7 +12,7 @@ else:
 VOC_CLASSES = (['gate'])
 
 # note: if you used our download scripts, this should be right
-VOC_ROOT = osp.join('/home/toandm2', "data/VOCdevkit/")
+VOC_ROOT = osp.join('/content/unzipped_dset/gate_dataset_pascal', "data/VOCdevkit/")
 
 
 class VOCAnnotationTransform(object):
